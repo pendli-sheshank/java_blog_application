@@ -12,22 +12,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name="categories")
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
-
+public class Category {
+	
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-
-	private String name;
-
-	private String email;
-
-	private String password;
-
-	private String about;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(name="categories_title")
+	private String categoryTitle;
+	
+	@Column(name="categories_description")
+	private String categoryDescription;
 
 }
