@@ -25,6 +25,9 @@ public class UserServiceImple implements UserServices {
 	@Override
 	public UserDto createUser(UserDto userDto) {
 
+		if (userRepo.findByEmail(userDto.getEmail()) != null)
+			throw new RuntimeException("Email already exists");
+		
 		User user = this.dtoToUser(userDto);
 		User saveduser = this.userRepo.save(user);
 		return this.userToDto(saveduser);

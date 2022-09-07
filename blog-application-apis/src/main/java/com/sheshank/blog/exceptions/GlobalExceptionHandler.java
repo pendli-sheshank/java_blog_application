@@ -3,6 +3,7 @@ package com.sheshank.blog.exceptions;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -37,6 +38,14 @@ public class GlobalExceptionHandler {
 		});
 		return new ResponseEntity<Map<String, String>>(res, HttpStatus.BAD_REQUEST);
 
+	}
+
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<ApiResponse> incorrectResult(RuntimeException ic) {
+		String message = ic.getMessage();
+		ApiResponse apiResponse = new ApiResponse(message, false);
+
+		return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }
